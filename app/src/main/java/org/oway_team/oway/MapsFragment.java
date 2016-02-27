@@ -42,6 +42,8 @@ public class MapsFragment extends Fragment implements JSONRouterProxyListener {
         mapView.showBuiltInScreenButtons(true);
         mJSONRouterProxy = new JSONRouterProxy(this);
         mMapController = mapView.getMapController();
+        //Start map on Novosibirsk
+        mMapController.setPositionAnimationTo(new GeoPoint(55.018803,82.933952));
         mOverlayManager = mMapController.getOverlayManager();
         mMapController.addMapListener(new OnMapListener() {
             @Override
