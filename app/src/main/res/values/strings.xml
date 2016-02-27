@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">OWay</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="items_add_addr_text">Add address</string>
+    <string name="items_add_item_text">Add Item</string>
+</resources>

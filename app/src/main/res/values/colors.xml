@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="navigation_items_list_divider">#DBDBDB</color>
+    <color name="transparent">#00000000</color>
+
+    <color name="main_bg_color">#FAFAFA</color>
+    <color name="fab_bg_color">#FF8600</color>
+</resources>
