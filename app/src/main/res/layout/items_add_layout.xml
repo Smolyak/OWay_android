@@ -37,62 +37,16 @@
         android:orientation="vertical"
         android:layout_alignParentRight="false"
         android:gravity="right">
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingRight="24dp">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/items_add_addr_text"
-                android:layout_gravity="center_vertical"
-                android:layout_marginRight="16dp"
-                />
-            <ImageButton
-                android:id="@+id/items_add_addr_button"
-                android:src="@drawable/plus"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:background="@drawable/fab_bg"
-                />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:paddingRight="24dp"
-            >
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/items_add_item_text"
-                android:layout_gravity="center_vertical"
-                android:layout_marginRight="16dp"
-                />
-            <ImageButton
-                android:id="@+id/items_add_item_button"
-                android:src="@drawable/plus"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:background="@drawable/fab_bg"
-                />
-        </LinearLayout>
+
     <ImageButton
-        android:id="@+id/items_add_next_button"
+        android:id="@+id/items_add_lets_go_button"
         android:layout_width="56dp"
         android:layout_height="56dp"
         android:layout_marginTop="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginBottom="16dp"
+        android:visibility="invisible"
         android:src="@drawable/plus"
         android:background="@drawable/fab_bg"/>
     </LinearLayout>
-    <Button
-        android:id="@+id/items_add_lets_go_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Let's go"
-        android:layout_gravity="center_horizontal"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
 </RelativeLayout>

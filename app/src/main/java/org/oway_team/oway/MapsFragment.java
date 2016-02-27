@@ -23,13 +23,10 @@ import java.util.List;
 import ru.yandex.yandexmapkit.MapController;
 import ru.yandex.yandexmapkit.MapView;
 import ru.yandex.yandexmapkit.OverlayManager;
-import ru.yandex.yandexmapkit.map.MapEvent;
-import ru.yandex.yandexmapkit.map.OnMapListener;
 import ru.yandex.yandexmapkit.overlay.Overlay;
 import ru.yandex.yandexmapkit.overlay.OverlayItem;
 import ru.yandex.yandexmapkit.overlay.balloon.BalloonItem;
 import ru.yandex.yandexmapkit.utils.GeoPoint;
-import ru.yandex.yandexmapkit.utils.ScreenPoint;
 
 public class MapsFragment extends Fragment implements JSONRouterProxyListener {
     public static final String TAG = "OWay-Map";

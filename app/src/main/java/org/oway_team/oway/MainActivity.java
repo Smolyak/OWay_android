@@ -2,10 +2,13 @@ package org.oway_team.oway;
 
 import android.app.Activity;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 
 import org.oway_team.oway.json.JSONNavigationItem;
 
@@ -58,7 +61,13 @@ public class MainActivity extends Activity /*AppCompatActivity*/ {
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         ft.replace(R.id.main_fragment_holder, mMapsFragment);
         ft.show(mMapsFragment);
+        ft.addToBackStack(null);
         ft.commit();
         mMapsFragment.postPoints(items);
+        View view = this.getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
     }
 }

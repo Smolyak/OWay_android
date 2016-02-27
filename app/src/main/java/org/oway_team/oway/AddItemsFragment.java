@@ -1,6 +1,7 @@
 package org.oway_team.oway;
 
 import android.app.Fragment;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.Editable;
@@ -13,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 
 import org.oway_team.oway.json.JSONNavigationItem;
@@ -34,14 +36,14 @@ public class AddItemsFragment extends Fragment implements SuggesterProxyListener
     SuggesterProxy mSuggestionProxy;
     private static final String TAG = "OWay-addItems";
 
-    Button mLetsGoButton;
+    ImageButton mLetsGoButton;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.items_add_layout, container, false);
         mNavigationItemsListView = (ListView)view.findViewById(R.id.items_add_list_view);
-        mLetsGoButton = (Button)view.findViewById(R.id.items_add_lets_go_button);
+        mLetsGoButton = (ImageButton)view.findViewById(R.id.items_add_lets_go_button);
         mEditText = (EditText)view.findViewById(R.id.items_add_edit_text);
         mAutocompleteListView = (ListView)view.findViewById(R.id.navigation_items_autocomplete_listview);
 
@@ -87,9 +89,6 @@ public class AddItemsFragment extends Fragment implements SuggesterProxyListener
         mAutocompleteListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                String txt = (((TextView) view).getText().toString());
-//                mIgnoreText = txt;
-//                Log.d(TAG, "Items: " + parent.getItemAtPosition(position).getClass());
                 Log.d(TAG, "Items: " + mAutocompleteAdapter.getCount());
                 addNavigationItemToList(mAutocompleteAdapter.getItem(position));
                 mEditText.setText("");
@@ -111,6 +110,9 @@ public class AddItemsFragment extends Fragment implements SuggesterProxyListener
             mNavigationItemsListView.setAdapter(mAdapter);
         }
         mAdapter.add(item);
+        if (mLetsGoButton.getVisibility() == View.INVISIBLE && mAdapter.getCount() > 1) {
+            mLetsGoButton.setVisibility(View.VISIBLE);
+        }
     }
     private void fillListViewWithFakeData() {
         ArrayList<JSONNavigationItem> items = new ArrayList<JSONNavigationItem>();
@@ -126,6 +128,9 @@ public class AddItemsFragment extends Fragment implements SuggesterProxyListener
     @Override
     public void onResume() {
         super.onResume();
+        if (mAdapter == null || mAdapter.getCount() < 2) {
+            mLetsGoButton.setVisibility(View.INVISIBLE);
+        }
 //        fillListViewWithFakeData();
     }
 
