@@ -59,8 +59,9 @@ public class MainActivity extends Activity /*AppCompatActivity*/ {
         Log.d(TAG, "Route requested");
         //TODO: Some api interaction
         FragmentTransaction ft = getFragmentManager().beginTransaction();
-        ft.replace(R.id.main_fragment_holder, mMapsFragment);
+//        ft.replace(R.id.main_fragment_holder, mMapsFragment);
         ft.show(mMapsFragment);
+        ft.hide(mAddItemsFragment);
         ft.addToBackStack(null);
         ft.commit();
         mMapsFragment.postPoints(items);
