@@ -10,11 +10,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import org.oway_team.oway.json.JSONLineString;
 import org.oway_team.oway.json.JSONNavigationItem;
 import org.oway_team.oway.json.JSONRequestBuilder;
 import org.oway_team.oway.json.JSONRoute;
 import org.oway_team.oway.json.JSONRouterProxy;
 import org.oway_team.oway.json.JSONRouterProxyListener;
+import org.oway_team.oway.maps.OverlayRect;
 
 import java.util.List;
 
@@ -36,6 +38,7 @@ public class MapsFragment extends Fragment implements JSONRouterProxyListener {
     JSONRouterProxy mJSONRouterProxy;
     OverlayManager mOverlayManager;
     String mRouteId;
+    JSONRoute mCurrentRoute;
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.maps_layout, container, false);
         final MapView mapView = (MapView) view.findViewById(R.id.map);
@@ -45,22 +48,6 @@ public class MapsFragment extends Fragment implements JSONRouterProxyListener {
         //Start map on Novosibirsk
         mMapController.setPositionAnimationTo(new GeoPoint(55.018803,82.933952));
         mOverlayManager = mMapController.getOverlayManager();
-        mMapController.addMapListener(new OnMapListener() {
-            @Override
-            public void onMapActionEvent(MapEvent mapEvent) {
-                Log.d("Map", "On map event: " + mapEvent.getMsg() + " " + mapEvent.getX() +
-                        ":" + mapEvent.getY());
-                if (mapEvent.getMsg() == MapEvent.MSG_LONG_PRESS) {
-                    GeoPoint gp = mMapController.getGeoPoint(new ScreenPoint(mapEvent.getX(),
-                            mapEvent.getY()));
-                    Log.d("Map","GP: "+gp.toString());
-                }
-            }
-        });
-
-//        OverlayRect overlayRect = new OverlayRect(mMapController);
-//
-//        mMapController.getOverlayManager().addOverlay(overlayRect);
 
         return view;
 
@@ -87,7 +74,6 @@ public class MapsFragment extends Fragment implements JSONRouterProxyListener {
             Overlay overlay = new Overlay(mMapController);
             overlay.addOverlayItem(kremlin);
             mOverlayManager.addOverlay(overlay);
-
         }
     }
 
@@ -100,7 +86,16 @@ public class MapsFragment extends Fragment implements JSONRouterProxyListener {
     //Route building finished
     @Override
     public void onRouteGetReady(JSONRoute jRoute) {
-
+        Log.d(TAG, "Route ready; Linestrings cnt: " + jRoute.lineStrings.size());
+        drawRoute(jRoute);
+    }
+    public void drawRoute(JSONRoute route) {
+        mCurrentRoute = route;
+        for (JSONLineString lineString:route.lineStrings) {
+            OverlayRect overlayRect = new OverlayRect(mMapController, lineString);
+            mMapController.getOverlayManager().addOverlay(overlayRect);
+        }
+        mMapController.notifyRepaint();
     }
 
     @Override

@@ -47,7 +47,9 @@ public class JSONRouterProxy implements AsyncHttpLoaderListener {
      */
     @Override
     public void onHttpGetFinished(String jsonItem) {
-        Log.d(TAG,"Http get finished: "+jsonItem);
+//        Log.d(TAG,"Http get finished: "+jsonItem);
+        JSONRoute route = JSONRouteBuider.buildRoute(jsonItem);
+        mListener.onRouteGetReady(route);
     }
 
     @Override
